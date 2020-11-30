@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Employee" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="967.333333333333,986" sap2010:WorkflowViewState.IdRef="Employee_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Employee" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="885.333333333333,1997.33333333333" sap2010:WorkflowViewState.IdRef="Employee_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="68">
+    <scg:List x:TypeArguments="x:String" Capacity="38">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -36,10 +36,13 @@
       <x:String>UiPath.Mail.Activities</x:String>
       <x:String>System.Security</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.Activities.Contracts</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="22">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="24">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -62,9 +65,11 @@
       <AssemblyReference>UiPath.Database</AssemblyReference>
       <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Employee" sap:VirtualizedContainerService.HintSize="890.666666666667,1886.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Employee" sap:VirtualizedContainerService.HintSize="890.666666666667,1892.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:DatabaseConnection" Name="DBConnection" />
       <Variable x:TypeArguments="sd:DataTable" Name="employeeDataTable" />
@@ -110,13 +115,13 @@
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:ExecuteQuery.Parameters>
     </ui:ExecuteQuery>
-    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[databaseTable]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="848.666666666667,925.333333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[databaseTable]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="848.666666666667,931.333333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="798,774" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="798,778.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="Email" />
               <Variable x:TypeArguments="x:String" Name="Attachment" />
@@ -166,28 +171,27 @@
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
             </ui:MultipleAssign>
-            <If Condition="[isActive &lt;&gt;  &quot;Active&quot;]" sap:VirtualizedContainerService.HintSize="756,452.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[isActive &lt;&gt;  &quot;Active&quot;]" sap:VirtualizedContainerService.HintSize="756,457.333333333333" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Employee &quot;+EmployeeName+&quot; is Inactive&quot;]" />
               </If.Then>
               <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="376,300.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence sap:VirtualizedContainerService.HintSize="376,303.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="ss:SecureString" Name="sendermail" />
                     <Variable x:TypeArguments="x:String" Name="senderpass" />
+                    <Variable x:TypeArguments="x:String" Name="password" />
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="email pass" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[sendermail]" Username="[senderpass]" />
-                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Find the attachment below" DisplayName="Send SMTP Mail Message" Email="snehilsingh4888@gmail.com" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,146.666666666667" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Password="sneh@556" Port="587" SecureConnection="Auto" Server="smtp.gmail.com" Subject="[&quot;Payslip for &quot;+EmployeeName]" To="[Email]">
+                  <ui:GetPassword DisplayName="Get Password" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GetPassword_1" ProtectedPassword="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX/VCwx2CgEKZBUzROdI5sAAAAAACAAAAAAAQZgAAAAEAACAAAAA0MJ6HsJ4ldDLudkvwPoETrCf3NsC8cqOhM21c9pEgHwAAAAAOgAAAAAIAACAAAAA/nWGOP5DYNVs82meCCA9jqJhHqWENqcyXgu3DAhKNbBAAAABSxskqBXKqy5esFqdQt1TzQAAAABje7vGhvn1PzrM6EWFo7X5O53FughoTynvSKrSihJ0m4Yy4cXXDjgO9e4PYU2RjKaPrs02qVc4S34dYRax37Ms=" Result="[password]" />
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="Find the attachment below" DisplayName="Send SMTP Mail Message" Email="snehilsingh4888@gmail.com" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,149.333333333333" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="False" Password="[password]" Port="587" SecureConnection="Auto" Server="smtp.gmail.com" Subject="[&quot;Payslip for &quot;+EmployeeName]" To="[Email]">
                     <ui:SendMail.Files>
                       <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                        <InArgument x:TypeArguments="x:String">
-                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Attachment" />
-                        </InArgument>
+                        <InArgument x:TypeArguments="x:String">[Attachment]</InArgument>
                       </scg:List>
                     </ui:SendMail.Files>
                   </ui:SendMail>
